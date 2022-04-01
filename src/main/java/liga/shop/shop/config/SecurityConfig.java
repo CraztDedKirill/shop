@@ -1,8 +1,10 @@
 package liga.shop.shop.config;
 
 import liga.shop.shop.core.service.PersonDataService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,20 +16,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    PersonDataService personDataService;
+    private PersonDataService personDataService;
 
-    LoginSuccessHandler loginSuccessHandler;
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
 
-    PasswordEncoder passwordEncoder;
-
-    public SecurityConfig(PersonDataService personDataService, LoginSuccessHandler loginSuccessHandler) {
+    @Autowired
+    public SecurityConfig(@Lazy PersonDataService personDataService) {
         this.personDataService = personDataService;
-        this.loginSuccessHandler = loginSuccessHandler;
     }
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(personDataService);
     }
 
     @Override
@@ -35,26 +36,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/owner/**").hasAuthority("ROLE_OWNER")
-                .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_OWNER")
+                .antMatchers("/owner/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
+                .anyRequest().authenticated();
+        http.formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .successHandler(loginSuccessHandler)
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .permitAll()
-                .and()
-                .logout()
                 .permitAll();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(personDataService)
-                .passwordEncoder(passwordEncoder);
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
     }
+
 }

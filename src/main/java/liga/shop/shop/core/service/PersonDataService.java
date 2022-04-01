@@ -19,16 +19,17 @@ import java.util.stream.Collectors;
 @Transactional
 public class PersonDataService implements UserDetailsService {
 
-    private PersonDataRepository personDataRepository;
+    PersonDataRepository personDataRepository;
 
-    private ModelMapper modelMapper;
+    ModelMapper modelMapper;
 
     private PasswordEncoder passwordEncoder;
 
-    public PersonDataService(PersonDataRepository repository, ModelMapper modelMapper) {
-        this.personDataRepository = repository;
+    public PersonDataService(PersonDataRepository personDataRepository,  ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+        this.personDataRepository = personDataRepository;
         this.modelMapper = modelMapper;
-        this.passwordEncoder = new BCryptPasswordEncoder(10);
+        this.passwordEncoder = new BCryptPasswordEncoder(12);
+
     }
 
     public List<PersonDataDto> findAll() {
@@ -38,6 +39,11 @@ public class PersonDataService implements UserDetailsService {
 
     public PersonDataDto findById(Long id) {
         PersonDataEntity personData = personDataRepository.findById(id);
+        return modelMapper.map(personData, PersonDataDto.class);
+    }
+
+    public PersonDataDto findByName(String name) {
+        PersonDataEntity personData = personDataRepository.findByName(name);
         return modelMapper.map(personData, PersonDataDto.class);
     }
 
@@ -54,10 +60,6 @@ public class PersonDataService implements UserDetailsService {
             personDataRepository.insert(personData);
         //       else
         //           personDataRepository.updateById(personData);
-    }
-
-    public void insertUser(PersonDataEntity personDataEntity) {
-        personDataRepository.insert(personDataEntity);
     }
 
     public void deleteById(Long id) {

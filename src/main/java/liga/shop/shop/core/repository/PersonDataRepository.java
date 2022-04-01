@@ -23,7 +23,7 @@ public interface PersonDataRepository {
     @Select("SELECT * FROM person_data WHERE email = #{email}")
     PersonDataEntity findByEmail(String email);
 
-    @Insert("insert into person_data (id, first_name, last_name, email, password)" + "values( #{id}, #{firstName}, #{lastName}, #{email}, #{password})")
+    @Insert("insert into person_data (id, first_name, last_name, email, password, role)" + "values( #{id}, #{firstName}, #{lastName}, #{email}, #{password}), #{role}")
     int insert(PersonDataEntity personDataEntity);
 
     Boolean deleteById(@Param("personDataId") Long personDataId);

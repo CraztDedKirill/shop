@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+
 @Data
 public class PersonDataEntity implements UserDetails {
 
@@ -20,6 +21,15 @@ public class PersonDataEntity implements UserDetails {
     private String password;
 
     private Role role;
+
+    public PersonDataEntity(Long id,String firstName, String lastName, String email, String password, Role role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
