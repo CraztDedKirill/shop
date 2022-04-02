@@ -1,10 +1,7 @@
 package liga.shop.shop.core.repository;
 
 import liga.shop.shop.core.model.PersonDataEntity;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,9 +23,11 @@ public interface PersonDataRepository {
     @Insert("insert into person_data (id, first_name, last_name, email, password, role)" + "values( #{id}, #{firstName}, #{lastName}, #{email}, #{password}), #{role}")
     int insert(PersonDataEntity personDataEntity);
 
-    Boolean deleteById(@Param("personDataId") Long personDataId);
+    @Delete("delete from person_data where id = #{id}")
+    Boolean deleteById(Long id);
 
-    //реализовать update
-    /// Boolean updateById(@Param("personDataEntity") PersonDataEntity personDataEntity);
+    @Update("update person_Data set  id = #{id} firstName = #{firstName}, lastName = #{lastName}," +
+            " email = #{email}, password = #{password}, role = #{role}," + "where id = #{id}")
+    Boolean updateById(PersonDataEntity personDataEntity);
 
 }

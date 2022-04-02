@@ -36,8 +36,9 @@ public class StorageService {
         storageRepository.deleteById(id);
     }
 
-    //написать метод обновления!!!
-    //
-    //
+    public void updateById(StorageEntity storageEntity) {
+
+        storageRepository.updateById(storageEntity);
+    }
 
 }

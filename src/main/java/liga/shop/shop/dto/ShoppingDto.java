@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class StorageDto {
+public class ShoppingDto {
 
-    private Long count;
+    private Integer amount;
 
-    private Long nomenclatureId;
+    private Long type_id;
 
 }

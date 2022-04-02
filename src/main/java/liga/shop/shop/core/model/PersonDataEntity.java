@@ -1,5 +1,6 @@
 package liga.shop.shop.core.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +9,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Data
+@AllArgsConstructor
 public class PersonDataEntity implements UserDetails {
 
     private Long id;
@@ -22,14 +24,6 @@ public class PersonDataEntity implements UserDetails {
 
     private Role role;
 
-    public PersonDataEntity(Long id,String firstName, String lastName, String email, String password, Role role) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

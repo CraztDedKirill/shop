@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/warehouse?currentSchema=inventory_control
+    url: jdbc:postgresql://localhost:5432/shop
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -20,7 +20,7 @@ spring:
 
   liquibase:
     enabled: false
-    change-log: db/master.xml
+    change-log: db/changelog/master.xml
 
   jpa:
     open-in-view: false

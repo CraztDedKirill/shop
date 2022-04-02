@@ -5,17 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class NomenclatureEntity {
+public class ShoppingEntity {
 
     private Long id;
 
-    private String name;
-
-    private String availability;
-
-    private Double price;
-
-    private String describe;
+    private Integer amount;
 
     private Long type_id;
 

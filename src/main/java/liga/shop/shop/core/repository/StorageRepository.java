@@ -16,15 +16,15 @@ public interface StorageRepository {
     @Select("select * from storage")
     List<StorageEntity> findAll();
 
-    @Select("select * from nomenclature where name = #{id} ")
+    @Select("select * from storage where id = #{id} ")
     StorageEntity findById(Long id);
 
-    @Select("select * from nomenclature where type_id = #{id} ")
+    @Select("select * from storage where type_id = #{id} ")
     StorageEntity findByTypeId(Long id);
 
-    Boolean deleteById(@Param("storageEntityId") Long storageEntityId);
+    @Update("update storage set id = #{id} count = #{count}, nomenclatureId = #{nomenclatureId}," + "where id = #{id}")
+    Boolean updateById(StorageEntity storageEntity);
 
-    // написать метод обновления
-    // !!
-    // !!
+    @Delete("delete from storage where id = #{id}")
+    Boolean deleteById(Long id);
 }

@@ -36,20 +36,13 @@ public class NomenclatureService {
         return nomenclatureRepository.findAllByTypeId(id);
     }
 
-    public void deleteByName(String name) {
-        nomenclatureRepository.deleteByName(name);
-    }
-
     public void deleteById(Long id) {
         nomenclatureRepository.deleteById(id);
     }
 
-    //   public void updateByName(String name) {
-    //       nomenclatureRepository.deleteByName(name);
-    //   }
+    public void updateById(NomenclatureEntity nomenclatureEntity) {
 
-    //   public void updateById(Long id) {
-    //       nomenclatureRepository.deleteById(id);
-    //   }
+        nomenclatureRepository.updateById(nomenclatureEntity);
+    }
 
 }

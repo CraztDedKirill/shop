@@ -1,5 +1,6 @@
 package liga.shop.shop.core.controller;
 
+import liga.shop.shop.core.model.PersonDataEntity;
 import liga.shop.shop.core.service.PersonDataService;
 import liga.shop.shop.dto.PersonDataDto;
 import org.modelmapper.ModelMapper;
@@ -7,10 +8,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Validated
 @RestController
-@RequestMapping("/owner/admins")
+@RequestMapping("/owner/administration")
 public class PersonDataController {
 
     private PersonDataService personDataService;
@@ -19,6 +21,10 @@ public class PersonDataController {
     public PersonDataController(ModelMapper modelMapper, PersonDataService personDataService) {
         this.modelMapper = modelMapper;
         this.personDataService = personDataService;
+    }
+    @PostMapping("/")
+    List<PersonDataDto> saveNewPersonDataEntity(){
+       return personDataService.findAll();
     }
 
     @PostMapping("/save")
@@ -43,7 +49,8 @@ public class PersonDataController {
         personDataService.deleteById(id);
     }
 
-    //метод на update
-    //
-    //!!!!1
+    @PatchMapping("/update")
+    public void updatePersonData(@RequestBody PersonDataEntity PersonDataEntity) {
+        personDataService.updateById(PersonDataEntity);
+    }
 }

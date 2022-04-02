@@ -48,18 +48,14 @@ public class PersonDataService implements UserDetailsService {
     }
 
 
-    //  @Override
-    //  public void updateById(PersonDataDto personDataDto) {
-    //      PersonDataEntity personData = modelMapper.map(personDataDto, PersonDataEntity.class);
-    //      personDataRepository.updateById(personData);
-    //  }
+    public void updateById(PersonDataEntity personDataEntity) {
+
+        personDataRepository.updateById(personDataEntity);
+    }
 
     public void insert(PersonDataDto personDataDto) {
         PersonDataEntity personData = modelMapper.map(personDataDto, PersonDataEntity.class);
-        if (personData.getId() == null)
             personDataRepository.insert(personData);
-        //       else
-        //           personDataRepository.updateById(personData);
     }
 
     public void deleteById(Long id) {

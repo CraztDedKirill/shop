@@ -35,19 +35,19 @@ public class NomenclatureController{
         return nomenclatureEntity;
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/user/{name}")
     NomenclatureEntity getNomenclatureEntityByName(@PathVariable String name) {
         NomenclatureEntity nomenclatureEntity = nomenclatureService.findByName(name);
         return nomenclatureEntity;
     }
 
-    @GetMapping("/type/{type_id}")
+    @GetMapping("/user/type/{type_id}")
     List<NomenclatureEntity> getAllNomenclatureEntityByType(Long type_id){
         List<NomenclatureEntity> list = nomenclatureService.findAllByType(type_id);
         return list;
     }
 
-    @GetMapping("/")
+    @GetMapping("/user/")
     List<NomenclatureEntity> getAllNomenclatureEntity(){
         List<NomenclatureEntity> list = nomenclatureService.findAll();
         return list;
@@ -58,11 +58,10 @@ public class NomenclatureController{
         nomenclatureService.deleteById(id);
     }
 
-    @DeleteMapping("/owner/deleteByName/{name}")
-    void deleteNomenclatureEntityByName(String name){
-        nomenclatureService.deleteByName(name);
-    }
 
-    // сделать запросы update
+    @PatchMapping("/owner/update")
+    public void updateNomenclatureEntity(@RequestBody NomenclatureEntity nomenclatureEntity) {
+        nomenclatureService.updateById(nomenclatureEntity);
+    }
 
 }

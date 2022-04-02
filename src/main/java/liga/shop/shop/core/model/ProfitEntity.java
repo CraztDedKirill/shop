@@ -3,14 +3,16 @@ package liga.shop.shop.core.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
-public class StorageEntity {
+public class ProfitEntity {
 
-    private Long id;
+    Long id;
 
-    private Long count;
+    Double amount;
 
-    private Long nomenclatureId;
+    LocalDate date;
 
 }

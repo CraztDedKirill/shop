@@ -19,21 +19,20 @@ public interface NomenclatureRepository {
     @Select("select * from nomenclature where name = #{name} ")
     NomenclatureEntity findByName(String name);
 
-    @Select("select * from nomenclature where name = #{id} ")
+    @Select("select * from nomenclature where id = #{id} ")
     NomenclatureEntity findById(Long id);
-
 
     @Insert("insert into nomenclature (id, name, availability, price, describe, type_id) " +
             "values(#{id}, #{name}, #{availability}, #{price}, #{describe}, #{type_id} )")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int insert(NomenclatureEntity nomenclatureEntity);
 
-    // Boolean updateByName(@Param("nomenclatureEntityName") String nomenclatureEntityName);
+    @Delete("delete from nomenclature where id = #{id}")
+    Boolean deleteById(Long id);
 
-    // Boolean updateById(@Param("nomenclatureEntityId") Long nomenclatureEntityId);
+    @Update("update nomenclature set  id = #{id} name = #{name}, availability = #{availability}," +
+            " price = #{price}, describe = #{describe}, type_id = #{type_id}," + "where id = #{id}")
+    Boolean updateById(NomenclatureEntity nomenclatureEntity);
 
-    Boolean deleteByName(@Param("nomenclatureEntityName") String nomenclatureEntityName);
-
-    Boolean deleteById(@Param("nomenclatureEntityId") Long nomenclatureEntityId);
 
 }

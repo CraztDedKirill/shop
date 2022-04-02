@@ -41,7 +41,7 @@ public class StorageController {
         return storageEntity;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     List<StorageEntity> getAllStorageEntity(){
         List<StorageEntity> list = storageService.findAll();
         return list;
@@ -52,8 +52,9 @@ public class StorageController {
         storageService.deleteById(id);
     }
 
-    /// написать метод обновления данных
-    ///
-    ///
+    @PatchMapping("/update")
+    public void updateStorageEntity(@RequestBody StorageEntity storageEntity) {
+       storageService.updateById(storageEntity);
+    }
 
 }
