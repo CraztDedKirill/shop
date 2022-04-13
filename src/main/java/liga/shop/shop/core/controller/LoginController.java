@@ -1,4 +1,4 @@
-package liga.shop.shop.core.controller;
+/*package liga.shop.shop.core.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,4 +11,4 @@ public class LoginController {
         return "login";
     }
 
-}
+}*/

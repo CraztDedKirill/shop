@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
 @Mapper
 public interface LogRepository {
 
-        @Insert("insert into log (event, name, name, args) " +
+        @Insert("insert into log (time, method_name, class_name, args) " +
                 "values(#{time}, #{methodName}, #{className}, #{args}) ")
         @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
         int insert(LogEntity logEntity);
 
-        @Select("select id from log_events where event = #{eventTime}")
+        @Select("select id from log where time = #{time}")
         long findLogId(LocalDateTime time);
 
 }

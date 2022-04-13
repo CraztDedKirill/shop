@@ -1,6 +1,7 @@
 package liga.shop.shop.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.AdviceMode;

@@ -19,16 +19,14 @@ import java.util.stream.Collectors;
 @Transactional
 public class PersonDataService implements UserDetailsService {
 
-    PersonDataRepository personDataRepository;
+    private PersonDataRepository personDataRepository;
 
-    ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
-    private PasswordEncoder passwordEncoder;
 
-    public PersonDataService(PersonDataRepository personDataRepository,  ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public PersonDataService(PersonDataRepository personDataRepository,  ModelMapper modelMapper) {
         this.personDataRepository = personDataRepository;
         this.modelMapper = modelMapper;
-        this.passwordEncoder = new BCryptPasswordEncoder(12);
 
     }
 
